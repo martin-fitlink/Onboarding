@@ -335,7 +335,13 @@ h1.title {
 .final-pill { background:rgba(201,169,110,.12); border-radius:10px; padding:8px 14px; font-size:11px; color:var(--gold); font-family:'Space Mono',monospace; letter-spacing:.05em; }
 
 /* ── LOADING ── */
-#loader { position:fixed; inset:0; background:var(--g2); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999; transition:opacity .6s ease; }
+#loader {
+  position:fixed; inset:0; background:var(--g2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:9999;
+  animation: loaderHide 0s 2s forwards;
+}
+@keyframes loaderHide { to { opacity:0; pointer-events:none; visibility:hidden; } }
 .loader-logo { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:700; color:var(--gold); margin-bottom:8px; }
 .loader-sub  { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:.22em; color:rgba(201,169,110,.5); margin-bottom:32px; }
 .loader-bar  { width:120px; height:2px; background:rgba(201,169,110,.2); border-radius:99px; overflow:hidden; }
@@ -1484,15 +1490,10 @@ scrollEl.addEventListener('touchend', e => {
 /* ═══════════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════════ */
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   buildNavProgress();
   showSection(0);
   applyTranslations();
-  setTimeout(() => {
-    const loader = document.getElementById('loader');
-    loader.style.opacity = '0';
-    setTimeout(() => loader.style.display = 'none', 600);
-  }, 1400);
 });
 </script>
 </body>
